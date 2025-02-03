@@ -32,26 +32,9 @@ function startQuiz(questions) {
             return;
         };
     }
-    let startMenuElement = document.querySelector(".start-menu");
-    startMenuElement.style.visibility = "hidden";
-
-    let quizSection = document.createElement("section");
-    quizSection.classList.add("quiz-section");
     
-    let questionElement = document.createElement("div");
-    questionElement.classList.add("question");
-    quizSection.appendChild(questionElement);
-
-    let answersElement = document.createElement("div");
-    answersElement.classList.add("answers");
-    quizSection.appendChild(answersElement);
-
-    let nextQuestionButton = document.createElement("button");
-    nextQuestionButton.classList.add("next-question");
+    [quizSection, questionElement, answersElement, nextQuestionButton] = initQuestionElements();
     nextQuestionButton.addEventListener("click", nextQuestion);
-    quizSection.appendChild(nextQuestionButton);
-
-    document.body.appendChild(quizSection);
 
     let questionNumber = 0;
 
@@ -95,6 +78,30 @@ function startQuiz(questions) {
     questionNumber++;
 
     return nextQuestion;
+}
+
+function initQuestionElements() {
+    let startMenuElement = document.querySelector(".start-menu");
+    startMenuElement.style.visibility = "hidden";
+
+    let quizSection = document.createElement("section");
+    quizSection.classList.add("quiz-section");
+    
+    let questionElement = document.createElement("div");
+    questionElement.classList.add("question");
+    quizSection.appendChild(questionElement);
+
+    let answersElement = document.createElement("div");
+    answersElement.classList.add("answers");
+    quizSection.appendChild(answersElement);
+
+    let nextQuestionButton = document.createElement("button");
+    nextQuestionButton.classList.add("next-question");
+    quizSection.appendChild(nextQuestionButton);
+
+    document.body.appendChild(quizSection);
+
+    return [quizSection, questionElement, answersElement, nextQuestionButton];
 }
 
 async function initQuiz() {
